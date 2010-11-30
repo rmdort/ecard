@@ -29,10 +29,13 @@ $emailsubject = "This is a sample subject!"; // Subject
 
 if ($FacebookUID == null){
 	
+	$FacebookUID =0;
+		
 	//Add to  Database
 	
+	$query = "INSERT INTO emails (UID,CardID,SendersName,SendersEmail,RecipientEmail,Message,Image) VALUES ('$FacebookUID', '$CardID', '$NoFacebookName', '$NoFacebookEmail', '$RecipientEmails[0]', '$Message', '$ImageURL')";
 	
-	
+	mysql_query($query) or die(mysql_error());
 	mysql_close($conn);	
 	
 	
@@ -57,13 +60,17 @@ if ($FacebookUID == null){
 	$mail->From = $webmaster_email;
 	$mail->FromName = "Germs Ecard Emailer";
 	
-	$email=$RecipientEmails[0]; // Recipients Email
+	$email=preg_split("/[,]+/",$RecipientEmails[0]); // Recipients Email Split by Comma
+	
+	// Only Find the first email as Non facebook user can only send to 1 friend
+	$email=$email[0];
 	$name="name"; // Recipient's name
 	$mail->AddAddress($email,$name);
 	
 	$mail->Subject = $emailsubject; 
 	$mail->IsHTML(true);
 	$mail->Body = file_get_contents("edm.html");
+	
 	
 	if(!$mail->Send())
 	{
@@ -81,6 +88,13 @@ if ($FacebookUID == null){
 // Else Send Facebook Email to Inbox
 else {
 	
+	
+	//Add to  Database
+	
+	$query = "INSERT INTO emails (UID,CardID,SendersName,SendersEmail,RecipientEmail,Message,Image) VALUES ('$FacebookUID', '$CardID', '$NoFacebookName', '$NoFacebookEmail', '$RecipientEmails[0]', '$Message', '$ImageURL')";
+	
+	mysql_query($query) or die(mysql_error());
+	mysql_close($conn);
 	
 	
 }
