@@ -2,6 +2,9 @@
 
 require("phpmailer/class.phpmailer.php");
 
+// DB Connect
+include("db.php");
+
 
 // Post Variable
 
@@ -18,15 +21,23 @@ $NoFacebookName = $_POST['NoFacebookName'];
 
 // Common Variables 
 
-$emailsubject = "This is a sample subject!";
+$emailsubject = "This is a sample subject!"; // Subject
 
-echo $RecipientEmails[0];
 
 
 // Send EDM if the Facebook UID is Empty
 
 if ($FacebookUID == null){
-
+	
+	//Add to  Database
+	
+	
+	
+	mysql_close($conn);	
+	
+	
+	// Email Recipient
+	
 	$emailsubject = "This is a sample subject!";
 	$emailbody = file_get_contents("edm.html");
 	
@@ -39,7 +50,7 @@ if ($FacebookUID == null){
 	$mail->SMTPAuth = true; // turn on SMTP authentication
 	$mail->SMTPKeepAlive = true;
 	$mail->Username = "rmdort@gmail.com"; // SMTP username
-	$mail->Password = "vinay19raj84"; // SMTP password
+	$mail->Password = ""; // SMTP password
 	$webmaster_email = "rmdort@gmail.com"; //Reply to this email ID
 	$mail->AddReplyTo($webmaster_email,"Webmaster"); // Reply To
 
@@ -62,6 +73,8 @@ if ($FacebookUID == null){
 	{
 	echo "Message has been sent";
 	}
+	
+	
 	
 }
 
