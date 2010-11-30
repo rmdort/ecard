@@ -14,6 +14,7 @@
 	<p>Message <textarea name="Message" id="Message" rows="10" cols="50"></textarea></p>
 	
 	<p>Recipients Email <input type="text" name="RecipientEmails[]" id="RecipientEmails[]" size="40" /></p>
+	<p>Recipients Ids <input type="text" name="recipientID[]" id="recipientID[]" size="40" /></p>
 	
 	<p>If facebook UID is empty.. Seperate Email and Name Field
 		<br>

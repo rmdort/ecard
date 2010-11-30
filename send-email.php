@@ -15,6 +15,7 @@ $CardID = $_POST['CardID'];
 $ImageURL = $_POST['ImageURL'];
 $Message = $_POST['Message'];
 $RecipientEmails = $_POST['RecipientEmails'];
+$recipientID = $_POST['recipientID'];
 
 $NoFacebookEmail = $_POST['NoFacebookEmail'];
 $NoFacebookName = $_POST['NoFacebookName'];
@@ -33,7 +34,7 @@ if ($FacebookUID == null){
 		
 	//Add to  Database
 	
-	$query = "INSERT INTO emails (UID,CardID,SendersName,SendersEmail,RecipientEmail,Message,Image) VALUES ('$FacebookUID', '$CardID', '$NoFacebookName', '$NoFacebookEmail', '$RecipientEmails[0]', '$Message', '$ImageURL')";
+	$query = "INSERT INTO emails (UID,CardID,SendersName,SendersEmail,RecipientEmail,Message,Image,recipientID) VALUES ('$FacebookUID', '$CardID', '$NoFacebookName', '$NoFacebookEmail', '$RecipientEmails[0]', '$Message', '$ImageURL','')";
 	
 	mysql_query($query) or die(mysql_error());
 	mysql_close($conn);	
@@ -91,7 +92,7 @@ else {
 	
 	//Add to  Database
 	
-	$query = "INSERT INTO emails (UID,CardID,SendersName,SendersEmail,RecipientEmail,Message,Image) VALUES ('$FacebookUID', '$CardID', '$NoFacebookName', '$NoFacebookEmail', '$RecipientEmails[0]', '$Message', '$ImageURL')";
+	$query = "INSERT INTO emails (UID,CardID,SendersName,SendersEmail,RecipientEmail,Message,Image,recipientID) VALUES ('$FacebookUID', '$CardID', '$NoFacebookName', '$NoFacebookEmail', '$RecipientEmails[0]', '$Message', '$ImageURL','$recipientID[0]')";
 	
 	mysql_query($query) or die(mysql_error());
 	mysql_close($conn);
